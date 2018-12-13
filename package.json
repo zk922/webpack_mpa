@@ -1,0 +1,9 @@
+{
+  "name": "webpack_mpa",
+  "version": "1.0.0",
+  "description": "webpack seed for multi-page application",
+  "main": "main.js",
+  "repository": "https://github.com/zk922/webpack_mpa.git",
+  "author": "zk922",
+  "license": "MIT"
+}
