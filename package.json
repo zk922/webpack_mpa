@@ -2,11 +2,14 @@
   "name": "webpack_mpa",
   "version": "1.0.0",
   "description": "webpack seed for multi-page application",
-  "main": "main.js",
+  "main": "scripts/main.js",
   "repository": "https://github.com/zk922/webpack_mpa.git",
   "author": "zk922",
   "license": "MIT",
   "node": "^10.13.0",
+  "scripts": {
+    "build": "node ./scripts/main.js"
+  },
   "devDependencies": {
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
