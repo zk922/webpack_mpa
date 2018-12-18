@@ -56,4 +56,6 @@ function getEntries(pageList){
   });
 }
 
-module.exports = getPageList().then(v=>getEntries(v));
+module.exports = function (){
+  return getPageList().then(v=>getEntries(v));
+};
