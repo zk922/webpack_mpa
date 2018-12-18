@@ -55,7 +55,10 @@ function getEntries(pageList){
     });
   });
 }
-
+/**
+ * 导出模块
+ * @return{Promise}
+ * **/
 module.exports = function (){
   return getPageList().then(v=>getEntries(v));
 };
