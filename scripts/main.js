@@ -8,7 +8,8 @@ let getEntry = require('./js/getEntries');      //获取entry配置
 
 getEntry().then(entry=>{
   config.entry = entry;
+  console.log(entry)
   webpack(config).run(function (v){
-
+    console.log(v)
   });
 });
