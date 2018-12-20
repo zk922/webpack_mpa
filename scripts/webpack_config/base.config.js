@@ -1,12 +1,12 @@
 const path = require('path');
-
-const {PROJECT_PATH, SRC_PATH} = require('../js/appPath');
+const webpack = require('webpack');
+const {PROJECT_PATH, SRC_PATH} = require('../config/appPath');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const env = process.env.NODE_ENV;
 
 
 module.exports = {
-  context: SRC_PATH,                        //基础路径
+  // context: SRC_PATH,                        //基础路径
   output: {
     path: path.resolve(PROJECT_PATH, 'dist'),
     hashDigestLength: 16,                      //hash长度
@@ -18,9 +18,9 @@ module.exports = {
     noParse: /lodash|jquery/,                   //不解析常见的第三方库，如果使用别的，可以在这里添加
     rules: [
       {
-        test: /\.scss$/,
+        test: /\.(scss|sass)$/,
         use: [
-          env === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
+          env === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',   //开发环境将
           "css-loader",                                   // translates CSS into CommonJS
           "sass-loader"                                   // compiles Sass to CSS, using Node Sass by default
         ]
@@ -34,6 +34,13 @@ module.exports = {
         ]
       },
       {
+        test: /\.css$/,
+        use: [
+          env === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
+          "css-loader",                                   // translates CSS into CommonJS
+        ]
+      },
+      {
         test: /\.(png|jpg|gif)$/,
         use: [
           {
@@ -41,8 +48,8 @@ module.exports = {
             options: {
               name: env === 'production' ? 'images/[hash].[ext]' : '[path][name].[ext]',
               publicPath: '/',
-              context: SRC_PATH,        //源码目录
-              outputPath: '/images'
+              context: SRC_PATH,        //源码目录,这里更改context，是为了在开发环境下，导出图片和图片源的路径一致
+              outputPath: '/'
             }
           }
         ]
@@ -50,8 +57,11 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      _: "lodash"
+    }),
     new MiniCssExtractPlugin({                              //分离css为单独文件的插件
-      filename: "[name]/style/[name].css",
+      filename: env === 'production' ? "[name]/style/[name].[hash].css" : "[name]/style/[name].css",
       chunkFilename: "[name]/style/[id].css"
     })
   ],
