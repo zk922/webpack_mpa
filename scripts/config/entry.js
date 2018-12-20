@@ -38,13 +38,13 @@ function getEntry(pageList){
     let err = new Error(`没有识别到pageList，无法获取入口文件`);
     console.error(err);
     process.exit(1);
-    return;
+    return null;
   }
   let entry = {};
   pageList.forEach(function(page){
     let p = path.resolve(PAGE_PATH, page.name);
     let entryList = [page.name + '.js', page.name + '.ts', 'index.js', 'index.ts']; //可能的entry文件名
-    entryList.some(v => {
+    entryList.some(v => {     //如果目录下找不到符合上面文件名格式的js或者ts文件，这个目录就会忽略。
       let entryPath = path.resolve(p, v);
       if(fs.existsSync(entryPath)){
         return entry[page.name] = entryPath;
