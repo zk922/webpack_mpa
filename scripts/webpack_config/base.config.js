@@ -1,6 +1,6 @@
 const path = require('path');
 
-const {PROJECT_PATH, SRC_PATH} = require('../js/appPath');
+const {PROJECT_PATH, SRC_PATH} = require('../config/appPath');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const env = process.env.NODE_ENV;
 
@@ -20,7 +20,7 @@ module.exports = {
       {
         test: /\.(scss|sass)$/,
         use: [
-          env === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
+          env === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',   //开发环境将
           "css-loader",                                   // translates CSS into CommonJS
           "sass-loader"                                   // compiles Sass to CSS, using Node Sass by default
         ]
@@ -58,7 +58,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({                              //分离css为单独文件的插件
-      filename: "[name]/style/[name].css",
+      filename: env === 'production' ? "[name]/style/[name].[hash].css" : "[name]/style/[name].css",
       chunkFilename: "[name]/style/[id].css"
     })
   ],

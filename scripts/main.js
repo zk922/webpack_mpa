@@ -1,15 +1,13 @@
 const path = require('path');
 const fs = require('fs');
-
 const webpack = require('webpack');
 
-let config = require('./webpack_config/base.config');
-let getEntry = require('./js/getEntries');      //获取entry配置
+const config = require('./webpack_config/base.config');    //基础配置文件
+const getEntry = require('./config/entry');                  //获取entry配置
 
-getEntry().then(entry=>{
-  config.entry = entry;
-  console.log(entry)
-  webpack(config).run(function (v){
-    console.log(v)
-  });
+getEntry(config)
+.then(config => {
+  webpack(config).run(err => {
+
+  })
 });
