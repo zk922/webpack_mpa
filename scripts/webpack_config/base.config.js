@@ -1,5 +1,5 @@
 const path = require('path');
-
+const webpack = require('webpack');
 const {PROJECT_PATH, SRC_PATH} = require('../config/appPath');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const env = process.env.NODE_ENV;
@@ -57,6 +57,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      _: "lodash"
+    }),
     new MiniCssExtractPlugin({                              //分离css为单独文件的插件
       filename: env === 'production' ? "[name]/style/[name].[hash].css" : "[name]/style/[name].css",
       chunkFilename: "[name]/style/[id].css"

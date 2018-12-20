@@ -31,12 +31,19 @@ function addLoaderConfig(config){
   config.module.rules.unshift(
     {
       test: /\.html$/,
-      use: {
-        loader: 'html-loader',
-        options: {
-          attrs: [':data-src']
+      use: [
+        {
+          loader: 'html-loader'
         }
-      }
+      ]
+    },
+    {
+      test: /\.ejs$/,
+      use: [
+        {
+          loader: 'ejs-loader'
+        }
+      ]
     }
   );
   return config;
