@@ -21,7 +21,6 @@ function addTemplateConfig(config) {
   addPluginConfig(config);
   return config;
 }
-
 /**
  * 给config添加loader配置
  * @param {object} config
@@ -41,7 +40,10 @@ function addLoaderConfig(config){
       test: /\.ejs$/,
       use: [
         {
-          loader: 'ejs-loader'
+          loader: 'html-loader'
+        },
+        {
+          loader: path.resolve(__dirname, '../loaders/ejs-loader.js') //自己简单实现的使用ejs2 engine的ejs-loader
         }
       ]
     }

@@ -6,4 +6,7 @@ const addTemplateConfig = require('./config/addTemplateConfig');  //添加模板
 
 getEntry(config)
 .then(config => addTemplateConfig(config))
-.then(config => webpack(config).run());
+.then(config => {
+  // console.log(JSON.stringify(config.module))
+  webpack(config).run()
+});
