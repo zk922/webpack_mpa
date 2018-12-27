@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const {PROJECT_PATH, SRC_PATH} = require('../config/appPath');
+const {PROJECT_PATH, SRC_PATH} = require('../config_scripts/appPath');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const env = process.env.NODE_ENV;
 
@@ -12,7 +12,7 @@ module.exports = {
     hashDigestLength: 16,                      //hash长度
     publicPath: '/',                           //静态资源根路径，使用cdn处理静态资源需要配置
     filename: env === 'production' ? '[name]/js/[name].[hash].js' : '[name]/js/[name].js',    //entry中每个bundle的打包文件
-    chunkFilename: '[id].chunk.js'
+    chunkFilename: '[id].chunk.js'             //不在entry中分离出来的文件，比如split-chunck插件分离出来的
   },
   module: {
     noParse: /lodash|jquery/,                   //不解析常见的第三方库，如果使用别的，可以在这里添加
@@ -30,7 +30,7 @@ module.exports = {
         use: [
           env === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
           "css-loader",                                   // translates CSS into CommonJS
-          "less-loader"                                   // compiles Lass to CSS, using Node Sass by default
+          "less-loader"                                   // compiles Less to CSS
         ]
       },
       {
@@ -41,7 +41,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpe?g|gif)$/,
         use: [
           {
             loader: 'file-loader',
@@ -57,12 +57,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      _: "lodash"
-    }),
     new MiniCssExtractPlugin({                              //分离css为单独文件的插件
       filename: env === 'production' ? "[name]/style/[name].[hash].css" : "[name]/style/[name].css",
       chunkFilename: "[name]/style/[id].css"
     })
-  ],
+  ]
 };
