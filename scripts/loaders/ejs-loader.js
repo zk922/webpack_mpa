@@ -3,9 +3,15 @@
  * **/
 const {getOptions, parseQuery} = require('loader-utils');
 const ejs = require('ejs');
+const {relative, resolve, dirname} = require('path');
+
 module.exports = function ejsLoader(str){
 
-  const options = Object.assign({}, getOptions(this));
+  const defaultOptions = {
+    srcPath: resolve(process.cwd(), 'src')
+  };
+
+  const options = Object.assign({}, defaultOptions, getOptions(this));
 
   /**
    * ejs引擎配置在loader的options.ejsOptions上配置，与ejs可配置项目相同。
@@ -20,18 +26,34 @@ module.exports = function ejsLoader(str){
    * 传入模板中的数据，有两种方法配置：
    * 1.在loader的options.data处配置。
    * 2.在文件路径的search部分配置。使用parseQuery工具方法解析即可。
+   * 3.添加一些可能在层叠模板中需要用到的相对路径前缀，比如SRC目录用来处理图片和第三方lib的src属性
    * 最后将两部分合并传入模板解析
    * **/
+  //query中的参数
   let query = {};
   if(this.resourceQuery){
     query = parseQuery(this.resourceQuery);
   }
-  let data = Object.assign(options.data || {}, query);
+  //模板中可能用到的变量，其实也可以去模板中再进行计算
+  let relativeSRC;       //入口模板文件与SRC目录的相对路径
+  try{
+    relativeSRC = relative(dirname(this.resource), options.srcPath);
+  }
+  catch (e) {
+    relativeSRC = relative(dirname(this.resource), defaultOptions.srcPath);
+    console.log(e);
+  }
+
+  let data = Object.assign(
+    options.data || {},
+    query,
+    {SRC: relativeSRC}
+  );
 
   //parse the template
   let result;
   try{
-    result = ejs.render(str, data, ejsOptions);
+    result = ejs.compile(str, ejsOptions)(data);
   }
   catch (e) {
     console.error(e);

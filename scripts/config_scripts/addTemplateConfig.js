@@ -9,30 +9,29 @@
 const fs = require('fs');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {PAGE_PATH, SRC_PATH} = require('./apppath');
 
-const {PAGE_PATH} = require('./apppath');
-
-/**
- * @param {object} config webpack的配置对象，需要已经使用entry.js中的脚本配置好了entry
- * @return {object}
- * **/
-function addTemplateConfig(config) {
-  addLoaderConfig(config);
-  addPluginConfig(config);
-  return config;
-}
+const env = process.env.NODE_ENV;
+const isProduction = env === 'production';
 /**
  * 给config添加loader配置
  * @param {object} config
  * @return {object} config
  * **/
 function addLoaderConfig(config){
+  const htmlLoaderConfig = {
+    minimize: isProduction,
+    removeComments: isProduction,
+    collapseWhitespace: isProduction,
+    attrs: [':src', ':href']
+  };
   config.module.rules.unshift(
     {
       test: /\.html$/,
       use: [
         {
-          loader: 'html-loader'
+          loader: 'html-loader',
+          options: htmlLoaderConfig
         }
       ]
     },
@@ -40,10 +39,14 @@ function addLoaderConfig(config){
       test: /\.ejs$/,
       use: [
         {
-          loader: 'html-loader'
+          loader: 'html-loader',
+          options: htmlLoaderConfig
         },
         {
-          loader: path.resolve(__dirname, '../loaders/ejs-loader.js') //自己简单实现的使用ejs2 engine的ejs-loader
+          loader: path.resolve(__dirname, '../loaders/ejs-loader.js'), //自己简单实现的使用ejs2 engine的ejs-loader
+          options: {
+            srcPath: SRC_PATH
+          }
         }
       ]
     }
@@ -80,6 +83,13 @@ function addPluginConfig(config){
   return config;
 }
 
-
-
+/**
+ * @param {object} config webpack的配置对象，需要已经使用entry.js中的脚本配置好了entry
+ * @return {object}
+ * **/
+function addTemplateConfig(config) {
+  addLoaderConfig(config);
+  addPluginConfig(config);
+  return config;
+}
 module.exports = addTemplateConfig;

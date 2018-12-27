@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const {PROJECT_PATH, SRC_PATH} = require('../config/appPath');
+const {PROJECT_PATH, SRC_PATH} = require('../config_scripts/appPath');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const env = process.env.NODE_ENV;
 
@@ -61,5 +61,5 @@ module.exports = {
       filename: env === 'production' ? "[name]/style/[name].[hash].css" : "[name]/style/[name].css",
       chunkFilename: "[name]/style/[id].css"
     })
-  ],
+  ]
 };
