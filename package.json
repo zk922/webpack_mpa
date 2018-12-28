@@ -12,6 +12,11 @@
     "serve": "node ./scripts/serve.js"
   },
   "devDependencies": {
+    "ejs": "^2.6.1",
+    "ejs-loader": "^0.3.1",
+    "express": "^4.16.4",
+    "loader-utils": "^1.2.1",
+    "lodash": "^4.17.11",
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
     "@types/ejs": "^2.6.1",
@@ -37,10 +42,6 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
-    "ejs": "^2.6.1",
-    "ejs-loader": "^0.3.1",
-    "express": "^4.16.4",
-    "loader-utils": "^1.2.1",
-    "lodash": "^4.17.11"
+
   }
 }
