@@ -69,7 +69,8 @@ function addPluginConfig(config){
           template: p,
           chunks: [entry],
           title: entry,
-          filename: entry + '/index.html'
+          filename: entry + '/index.html',
+          chunksSortMode: 'auto'
         }));
         return true;
       }

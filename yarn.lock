@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@angular/core@^7.1.4":
+  version "7.1.4"
+  resolved "http://registry.npm.taobao.org/@angular/core/download/@angular/core-7.1.4.tgz#ad899985290957bbb9ac5c47c62ae5a72ccf5d00"
+  integrity sha1-rYmZhSkJV7u5rFxHxirlpyzPXQA=
+  dependencies:
+    tslib "^1.9.0"
+
 "@babel/code-frame@^7.0.0":
   version "7.0.0"
   resolved "http://registry.npm.taobao.org/@babel/code-frame/download/@babel/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"
@@ -649,7 +656,7 @@
   resolved "http://registry.npm.taobao.org/@types/mime/download/@types/mime-2.0.0.tgz#5a7306e367c539b9f6543499de8dd519fac37a8b"
   integrity sha1-WnMG42fFObn2VDSZ3o3VGfrDeos=
 
-"@types/node@*", "@types/node@^10.12.14":
+"@types/node@*":
   version "10.12.18"
   resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"
   integrity sha1-HTynZHGJFVhPzZ9jRGIbdnJmXGc=
@@ -892,6 +899,11 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/amdefine/download/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
+
+angular@^1.7.5:
+  version "1.7.5"
+  resolved "http://registry.npm.taobao.org/angular/download/angular-1.7.5.tgz#d1c1c01c6f5dc835638f3f9aa51012857bdac49e"
+  integrity sha1-0cHAHG9dyDVjjz+apRAShXvaxJ4=
 
 ansi-colors@^3.0.0:
   version "3.2.3"
@@ -3280,6 +3292,11 @@ isstream@~0.1.2:
   resolved "http://registry.npm.taobao.org/isstream/download/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
   integrity sha1-R+Y/evVa+m+S4VAOaQ64uFKcCZo=
 
+jquery@^3.3.1:
+  version "3.3.1"
+  resolved "http://registry.npm.taobao.org/jquery/download/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
+  integrity sha1-lYzinoHJeQ8xvneS311NlfxX+8o=
+
 js-base64@^2.1.8:
   version "2.5.0"
   resolved "http://registry.npm.taobao.org/js-base64/download/js-base64-2.5.0.tgz#42255ba183ab67ce59a0dee640afdc00ab5ae93e"
@@ -3695,7 +3712,7 @@ mime@^1.4.1:
   resolved "http://registry.npm.taobao.org/mime/download/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
   integrity sha1-Ms2eXGRVO9WNGaVor0Uqz/BJgbE=
 
-mime@^2.3.1:
+mime@^2.0.3, mime@^2.3.1:
   version "2.4.0"
   resolved "http://registry.npm.taobao.org/mime/download/mime-2.4.0.tgz#e051fd881358585f3279df333fe694da0bcffdd6"
   integrity sha1-4FH9iBNYWF8yed8zP+aU2gvP/dY=
@@ -5699,6 +5716,15 @@ urix@^0.1.0:
   version "0.1.0"
   resolved "http://registry.npm.taobao.org/urix/download/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
   integrity sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
+
+url-loader@^1.1.2:
+  version "1.1.2"
+  resolved "http://registry.npm.taobao.org/url-loader/download/url-loader-1.1.2.tgz#b971d191b83af693c5e3fea4064be9e1f2d7f8d8"
+  integrity sha1-uXHRkbg69pPF4/6kBkvp4fLX+Ng=
+  dependencies:
+    loader-utils "^1.1.0"
+    mime "^2.0.3"
+    schema-utils "^1.0.0"
 
 url-parse@^1.4.3:
   version "1.4.4"
