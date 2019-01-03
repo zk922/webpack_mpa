@@ -6,6 +6,7 @@ const env = process.env.NODE_ENV;
 
 module.exports = {
   // context: SRC_PATH,                        //基础路径
+  mode: 'development',
   output: {
     path: path.resolve(PROJECT_PATH, 'dist'),
     hashDigestLength: 16,                      //hash长度
@@ -14,12 +15,12 @@ module.exports = {
     chunkFilename: '[id].chunk.js'             //不在entry中分离出来的文件，比如split-chunck插件分离出来的
   },
   module: {
-    noParse: /lodash|jquery/,                   //不解析常见的第三方库，如果使用别的，可以在这里添加
+    // noParse: /lodash|jquery/,                   //不解析常见的第三方库，如果使用别的，可以在这里添加
     rules: [
       {
         test: /\.(scss|sass)$/,
         use: [
-          env === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
+          MiniCssExtractPlugin.loader,
           "css-loader",                                   // translates CSS into CommonJS
           "sass-loader"                                   // compiles Sass to CSS, using Node Sass by default
         ]
@@ -27,7 +28,7 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          env === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
+          MiniCssExtractPlugin.loader,
           "css-loader",                                   // translates CSS into CommonJS
           "less-loader"                                   // compiles Less to CSS
         ]
@@ -35,7 +36,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          env === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
+          MiniCssExtractPlugin.loader,
           "css-loader",                                   // translates CSS into CommonJS
         ]
       },

@@ -69,7 +69,8 @@ function addPluginConfig(config){
           template: p,
           chunks: [entry],
           title: entry,
-          filename: entry + '/index.html'
+          filename: entry + '/index.html',
+          chunksSortMode: 'auto'
         }));
         return true;
       }
@@ -87,9 +88,9 @@ function addPluginConfig(config){
  * @param {object} config webpack的配置对象，需要已经使用entry.js中的脚本配置好了entry
  * @return {object}
  * **/
-function templateConfig(config) {
+function addTemplateConfig(config) {
   addLoaderConfig(config);
   addPluginConfig(config);
   return config;
 }
-module.exports = templateConfig;
+module.exports = addTemplateConfig;
