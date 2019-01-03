@@ -7,8 +7,6 @@
  * @param {object} config
  * @return {object}
  * **/
-let i = 0;
-let arr=['a','b','c','d','e','f','g','h'];
 function addOptimization(config){
   config.optimization = {
     splitChunks: {
@@ -19,10 +17,6 @@ function addOptimization(config){
       automaticNameDelimiter: '~',
       minChunks: 1,
       name: false,
-      // name: function () {
-      //
-      //   return arr[i++];
-      // },
       cacheGroups: {
         vendors: {
           chunks: 'all',
@@ -41,7 +35,9 @@ function addOptimization(config){
           minChunks: 1,
           priority: -10,
           enforce: true
-        }
+        },
+        default: false
+
       },
 
     }
