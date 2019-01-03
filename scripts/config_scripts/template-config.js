@@ -87,9 +87,9 @@ function addPluginConfig(config){
  * @param {object} config webpack的配置对象，需要已经使用entry.js中的脚本配置好了entry
  * @return {object}
  * **/
-function addTemplateConfig(config) {
+function templateConfig(config) {
   addLoaderConfig(config);
   addPluginConfig(config);
   return config;
 }
-module.exports = addTemplateConfig;
+module.exports = templateConfig;

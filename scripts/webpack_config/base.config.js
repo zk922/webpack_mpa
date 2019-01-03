@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 const {PROJECT_PATH, SRC_PATH} = require('../config_scripts/appPath');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const env = process.env.NODE_ENV;
@@ -20,7 +19,7 @@ module.exports = {
       {
         test: /\.(scss|sass)$/,
         use: [
-          env === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',   //开发环境将
+          env === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
           "css-loader",                                   // translates CSS into CommonJS
           "sass-loader"                                   // compiles Sass to CSS, using Node Sass by default
         ]
@@ -41,16 +40,30 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpe?g|gif)$/,
+        test: /\.(png|jpe?g|gif|svg)$/,
         use: [
           {
             loader: 'url-loader',
             options: {
-              limit: 102400000,
+              limit: 10240,
               name: env === 'production' ? 'images/[hash].[ext]' : '[path][name].[ext]',
               publicPath: '/',
               context: SRC_PATH,        //源码目录,这里更改context，是为了在开发环境下，导出图片和图片源的路径一致
               outputPath: '/'
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(eot|woff2?|ttf)$/,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              name: env === 'production' ? 'fonts/[name].[hash].[ext]' : '[path][name].[ext]',
+              limit: 5120,
+              publicPath: "/",
+              outputPath: "/"
             }
           }
         ]
