@@ -30,7 +30,7 @@ function getPageList(){
 
 /**
  * 2.获取入口文件
- * @param{Dirent[]} pageList
+ * @param{Array<Dirent>} pageList
  * @return {object}  entry配置项
  * **/
 function getEntry(pageList){
@@ -41,7 +41,7 @@ function getEntry(pageList){
     return null;
   }
   let entry = {};
-  pageList.forEach(function(page){//获取自建page列表
+  pageList.forEach(/**@param {Dirent} page **/function(page){//获取自建page列表
     let p = path.resolve(PAGE_PATH, page.name);
     let entryList = [page.name + '.js', page.name + '.ts', 'index.js', 'index.ts']; //可能的entry文件名
     entryList.some(v => {     //如果目录下找不到符合上面文件名格式的js或者ts文件，这个目录就会忽略。

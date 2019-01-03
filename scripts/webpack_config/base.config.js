@@ -44,8 +44,9 @@ module.exports = {
         test: /\.(png|jpe?g|gif)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader',
             options: {
+              limit: 102400000,
               name: env === 'production' ? 'images/[hash].[ext]' : '[path][name].[ext]',
               publicPath: '/',
               context: SRC_PATH,        //源码目录,这里更改context，是为了在开发环境下，导出图片和图片源的路径一致
