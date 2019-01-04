@@ -14,23 +14,7 @@ module.exports = {
     chunkFilename: '[id].chunk.js'             //不在entry中分离出来的文件，比如split-chunck插件分离出来的
   },
   module: {
-    // noParse: /lodash|jquery/,                   //不解析常见的第三方库，如果使用别的，可以在这里添加
-    rules: [
-      {
-        test: /\.(eot|woff2?|ttf)$/,
-        use: [
-          {
-            loader: "url-loader",
-            options: {
-              name: env === 'production' ? 'fonts/[name].[hash].[ext]' : '[path][name].[ext]',
-              limit: 5120,
-              publicPath: "/",
-              outputPath: "/"
-            }
-          }
-        ]
-      }
-    ]
+    rules: []
   },
   plugins: []
 };
