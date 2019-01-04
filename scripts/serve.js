@@ -31,7 +31,7 @@ generateConfig().then(config => {
     if(err){
       console.error(err);
     }
-    console.log('server started');
+    console.log('server started at port: ' + appConfig.devServer.port);
     cp.exec('explorer http://localhost:' + appConfig.devServer.port + '/' + Object.keys(config.entry)[0]);
   })
 });
