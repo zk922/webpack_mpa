@@ -3,5 +3,8 @@
   "language": "ts",
   "style": "scss",
   "template": "ejs",
-  "target": "es5"
+  "target": "es5",
+  "devServer": {
+    "port": 3100
+  }
 }

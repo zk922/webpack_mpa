@@ -11,7 +11,6 @@ function addOptimization(config){
   config.optimization = {
     splitChunks: {
       chunks: 'all',
-      // maxSize: 500000,
       maxAsyncRequests: 5,
       maxInitialRequests: 3,
       automaticNameDelimiter: '~',
@@ -21,8 +20,6 @@ function addOptimization(config){
         vendors: {
           chunks: 'all',
           test: /[\\/]node_modules[\\/]/,
-          // name: 'vendors',
-          // filename: 'abv.js',
           minChunks: 1,
           priority: -10,
           enforce: true
@@ -30,8 +27,6 @@ function addOptimization(config){
         common: {
           chunks: 'all',
           test: /[\\/]public[\\/]/,
-          // name: 'vendors',
-          // filename: 'abv.js',
           minChunks: 1,
           priority: -10,
           enforce: true

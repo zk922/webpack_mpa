@@ -13,6 +13,7 @@ module.exports = {
     filename: env === 'production' ? '[name]/js/[name].[hash].js' : '[name]/js/[name].js',    //entry中每个bundle的打包文件
     chunkFilename: '[id].chunk.js'             //不在entry中分离出来的文件，比如split-chunck插件分离出来的
   },
+  devtool: 'inline-source-map',
   module: {
     rules: []
   },
