@@ -1,3 +1,5 @@
 {
-
+  "language": "ts",
+  "style": "scss",
+  "template": "ejs"
 }
