@@ -12,11 +12,11 @@ const appConfig = require('../app.config');
 
 
 generateConfig().then(config => {
-  //添加热更配置
+  //1.添加热更入口配置
   let hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
   let entry = config.entry;
   let newEntry = {};
-  Object.keys(entry).forEach(k=>newEntry[k]=[entry[k], hotMiddlewareScript]);
+  Object.keys(entry).forEach(k => newEntry[k] = [entry[k], hotMiddlewareScript]);
   config.entry = newEntry;
   config.plugins.push(new webpack.HotModuleReplacementPlugin());
 
