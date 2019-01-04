@@ -1,5 +1,5 @@
 const parseArgs = require('minimist');
-
+const webpack = require('webpack');
 const productionArgs = ['production', 'prod', 'pro'];
 
 
@@ -19,6 +19,9 @@ function setEnv(config) {
   //1.设置webpack的mode
   process.env.NODE_ENV = productionArgs.includes(env) ? 'production' : env;
   config.mode = productionArgs.includes(env) ? 'production' : 'development';
+  config.plugins.push( new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+  }));
   return config;
 }
 
