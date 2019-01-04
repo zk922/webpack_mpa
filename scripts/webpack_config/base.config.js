@@ -2,7 +2,6 @@ const path = require('path');
 const {PROJECT_PATH} = require('../config_scripts/appPath');
 const env = process.env.NODE_ENV;
 
-
 module.exports = {
   // context: SRC_PATH,                        //基础路径
   mode: 'development',
