@@ -5,3 +5,4 @@
 - [ ] post-css  
 - [ ] hmr css  
 - [ ] Uglify  
+- [x] environments
