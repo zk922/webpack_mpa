@@ -1,6 +1,6 @@
-import './test.css';
+// import './test.css';
 import './page1.scss';
-import './page2.less';
+// import './page2.less';
 import * as $ from "jquery";
 
 

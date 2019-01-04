@@ -1,5 +1,5 @@
 const path = require('path');
-const {PROJECT_PATH, SRC_PATH} = require('../config_scripts/appPath');
+const {PROJECT_PATH} = require('../config_scripts/appPath');
 const env = process.env.NODE_ENV;
 
 
@@ -16,21 +16,6 @@ module.exports = {
   module: {
     // noParse: /lodash|jquery/,                   //不解析常见的第三方库，如果使用别的，可以在这里添加
     rules: [
-      {
-        test: /\.(png|jpe?g|gif|svg)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 10240,
-              name: env === 'production' ? 'images/[hash].[ext]' : '[path][name].[ext]',
-              publicPath: '/',
-              context: SRC_PATH,        //源码目录,这里更改context，是为了在开发环境下，导出图片和图片源的路径一致
-              outputPath: '/'
-            }
-          }
-        ]
-      },
       {
         test: /\.(eot|woff2?|ttf)$/,
         use: [
