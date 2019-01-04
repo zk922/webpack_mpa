@@ -1,4 +1,5 @@
 {
+  "package-manager": "yarn",
   "language": "ts",
   "style": "scss",
   "template": "ejs"

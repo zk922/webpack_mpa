@@ -15,8 +15,9 @@ const productionArgs = ['production', 'prod', 'pro'];
  * **/
 function setEnv(config) {
   let args = parseArgs(process.argv.slice(2));
-  let env = process.env.NODE_ENV = args._[0] || args.env || 'dev';
+  let env = args._[0] || args.env || 'dev';
   //1.设置webpack的mode
+  process.env.NODE_ENV = productionArgs.includes(env) ? 'production' : env;
   config.mode = productionArgs.includes(env) ? 'production' : 'development';
   return config;
 }
