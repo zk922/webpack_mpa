@@ -8,49 +8,61 @@
  * **/
 const fs = require('fs');
 const path = require('path');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {PAGE_PATH, SRC_PATH} = require('./apppath');
+const appConfig = require('../../app.config');
 
+//1.获取环境信息
 const env = process.env.NODE_ENV;
 const isProduction = env === 'production';
+
+//2.模板的loader配置
+const htmlLoaderConfig = {
+  minimize: isProduction,
+  removeComments: isProduction,
+  collapseWhitespace: isProduction,
+  attrs: [':src', ':href']
+};
+const templateConfig = {
+  html: {
+    test: /\.html$/,
+    use: [
+      {
+        loader: 'html-loader',
+        options: htmlLoaderConfig
+      }
+    ]
+  },
+  ejs: {
+    test: /\.ejs$/,
+    use: [
+      {
+        loader: 'html-loader',
+        options: htmlLoaderConfig
+      },
+      {
+        loader: path.resolve(__dirname, '../loaders/ejs-loader.js'), //自己简单实现的使用ejs2 engine的ejs-loader
+        options: {
+          srcPath: SRC_PATH
+        }
+      }
+    ]
+  }
+};
+
+
+
+//3.获取当前的模板选择，默认html
+let ext = appConfig.template || 'html';
+
 /**
  * 给config添加loader配置
  * @param {object} config
  * @return {object} config
  * **/
 function addLoaderConfig(config){
-  const htmlLoaderConfig = {
-    minimize: isProduction,
-    removeComments: isProduction,
-    collapseWhitespace: isProduction,
-    attrs: [':src', ':href']
-  };
-  config.module.rules.unshift(
-    {
-      test: /\.html$/,
-      use: [
-        {
-          loader: 'html-loader',
-          options: htmlLoaderConfig
-        }
-      ]
-    },
-    {
-      test: /\.ejs$/,
-      use: [
-        {
-          loader: 'html-loader',
-          options: htmlLoaderConfig
-        },
-        {
-          loader: path.resolve(__dirname, '../loaders/ejs-loader.js'), //自己简单实现的使用ejs2 engine的ejs-loader
-          options: {
-            srcPath: SRC_PATH
-          }
-        }
-      ]
-    }
-  );
+  config.module.rules.unshift(templateConfig[ext]);
   return config;
 }
 
@@ -61,7 +73,7 @@ function addLoaderConfig(config){
  * **/
 function addPluginConfig(config){
   for(let entry of Object.keys(config.entry)){
-    let templateList = [entry + '.ejs', entry + '.html', 'index.ejs', 'index.html'];    //可能的entry文件名
+    let templateList = [`${entry}.${ext}`, `index.${ext}`];    //可能的entry文件名
     let hasTemplate = templateList.some(template => {//1.检查是否有有效的模板文件
       let p = path.resolve(PAGE_PATH, entry, template);
       if(fs.existsSync(p)){
@@ -76,7 +88,7 @@ function addPluginConfig(config){
       }
     });
     if(!hasTemplate){
-      console.error(new Error(`${entry} 页面没有找到合适的模板`));
+      console.error(new Error(`当前模板配置为${ext}\n${entry} 页面没有找到合适的模板`));
       process.exit(1);
       break;
     }

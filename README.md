@@ -1,5 +1,7 @@
 # 多页面通用webpack项目脚手架
 
-
-1. 非生产环境，打包尽量少分离文件，样式表使用style-loader。同时，所有文件不压缩，不计算hash。
-2.
+## TODO
+- [ ] babel
+- [ ] post-css  
+- [ ] hmr css  
+- [ ] Uglify  
