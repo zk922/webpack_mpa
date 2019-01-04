@@ -13,10 +13,10 @@ generateConfig().then(config => {
     publicPath: config.output.publicPath
   }));
 
-  app.listen(appConfig.devServer.port, (err)=>{
+  app.listen(appConfig.devServer.port, err => {
     if(err){
       console.error(err);
     }
-    console.log('server started')
+    console.log('server started');
   })
 });
