@@ -88,7 +88,7 @@ function addPluginConfig(config){
       }
     });
     if(!hasTemplate){
-      console.error(new Error(`${entry} 页面没有找到合适的模板`));
+      console.error(new Error(`当前模板配置为${ext}\n${entry} 页面没有找到合适的模板`));
       process.exit(1);
       break;
     }

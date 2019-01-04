@@ -1,6 +1,5 @@
 const path = require('path');
 const {PROJECT_PATH, SRC_PATH} = require('../config_scripts/appPath');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const env = process.env.NODE_ENV;
 
 
@@ -17,29 +16,6 @@ module.exports = {
   module: {
     // noParse: /lodash|jquery/,                   //不解析常见的第三方库，如果使用别的，可以在这里添加
     rules: [
-      {
-        test: /\.(scss|sass)$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",                                   // translates CSS into CommonJS
-          "sass-loader"                                   // compiles Sass to CSS, using Node Sass by default
-        ]
-      },
-      {
-        test: /\.less$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",                                   // translates CSS into CommonJS
-          "less-loader"                                   // compiles Less to CSS
-        ]
-      },
-      {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",                                   // translates CSS into CommonJS
-        ]
-      },
       {
         test: /\.(png|jpe?g|gif|svg)$/,
         use: [
@@ -71,10 +47,5 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new MiniCssExtractPlugin({                              //分离css为单独文件的插件
-      filename: env === 'production' ? "[name]/style/[name].[hash].css" : "[name]/style/[name].css",
-      chunkFilename: env === 'production' ? "[name].[hash].css" : "[name].css"
-    })
-  ]
+  plugins: []
 };

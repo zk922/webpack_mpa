@@ -37,7 +37,7 @@ function addOptimization(config){
           enforce: true
         },
         default: false
-      },
+      }
     }
     // runtimeChunk: {
     //   "name": "manifest"

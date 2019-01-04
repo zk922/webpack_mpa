@@ -2,5 +2,6 @@
   "package-manager": "yarn",
   "language": "ts",
   "style": "scss",
-  "template": "ejs"
+  "template": "ejs",
+  "target": "es5"
 }
