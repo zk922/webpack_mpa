@@ -8,7 +8,7 @@ const {relative, resolve, dirname} = require('path');
 module.exports = function ejsLoader(str){
 
   const defaultOptions = {
-    srcPath: resolve(process.cwd(), 'src')
+    context: resolve(process.cwd())
   };
 
   const options = Object.assign({}, defaultOptions, getOptions(this));
@@ -35,19 +35,19 @@ module.exports = function ejsLoader(str){
     query = parseQuery(this.resourceQuery);
   }
   //模板中可能用到的变量，其实也可以去模板中再进行计算
-  let relativeSRC;       //入口模板文件与SRC目录的相对路径
+  let relativePath;       //入口模板文件与SRC目录的相对路径
   try{
-    relativeSRC = relative(dirname(this.resource), options.srcPath);
+    relativePath = relative(dirname(this.resource), options.context);
   }
   catch (e) {
-    relativeSRC = relative(dirname(this.resource), defaultOptions.srcPath);
+    relativePath = relative(dirname(this.resource), defaultOptions.context);
     console.log(e);
   }
 
   let data = Object.assign(
     options.data || {},
     query,
-    {SRC: relativeSRC}
+    {context: relativePath}
   );
 
   //parse the template

@@ -6,7 +6,7 @@
  * **/
 const fs = require('fs');
 const path = require('path');
-const {PAGE_PATH} = require('./apppath');
+const {PAGE_PATH} = require('./0.app-path');
 
 
 /**

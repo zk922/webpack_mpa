@@ -1,6 +1,6 @@
 import * as angular from "angular"
 
-require('../../public/js/a');
-require('../../public/js/b');
+require('../../assets/js/a');
+require('../../assets/js/b');
 
-// import '../../public/style/a.scss';
+import '../../assets/style/a.scss';
