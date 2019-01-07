@@ -1,1 +1,1 @@
-declare let SRC: string;
+declare let context: string;

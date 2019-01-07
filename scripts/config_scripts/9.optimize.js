@@ -26,7 +26,7 @@ function addOptimization(config){
         },
         common: {
           chunks: 'all',
-          test: /[\\/]public[\\/]/,
+          test: /[\\/]assets[\\/]/,
           minChunks: 1,
           priority: -10,
           enforce: true

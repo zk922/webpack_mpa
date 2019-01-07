@@ -1,3 +1,3 @@
 import * as $ from "jquery";
-require('../../public/js/b');
-import '../../public/style/a.scss';
+require('../../assets/js/b');
+import '../../assets/style/a.scss';

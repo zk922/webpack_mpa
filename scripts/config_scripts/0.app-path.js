@@ -9,7 +9,7 @@ let PROJECT_PATH = process.cwd();                     //项目路径，与执行
 let SRC_PATH = path.resolve(PROJECT_PATH, 'src');      //src目录路径
 
 if(!fs.existsSync(SRC_PATH)){  //如果src目录不存在，报错，退出进程。
-  console.error('未找到源码目录，请在项目根目录下执行打包命令');
+  console.error('未找到源码目录，请在项目根目录下执行打包命令，源码目录应为src');
   process.exit(1);
 }
 let PAGE_PATH = path.resolve(SRC_PATH, 'pages');

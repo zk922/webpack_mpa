@@ -1,4 +1,4 @@
-const {SRC_PATH} = require('./apppath');
+const {SRC_PATH} = require('./0.app-path');
 /**
  * 添加对图片的loader配置
  * **/
