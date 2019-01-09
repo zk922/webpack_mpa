@@ -12,7 +12,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {PAGE_PATH, PROJECT_PATH} = require('./0.app-path');
 const appConfig = require('../../app.config');
-
+const {getType} = require('./utils');
 
 module.exports = function (config) {
   //1.获取环境信息
@@ -56,12 +56,40 @@ module.exports = function (config) {
   let ext = appConfig.template || 'html';
 
   /**
-   * 给config添加loader配置
+   * 根据app.config中的template配置类型进行区分处理
+   * @param { function } callback 对ext进行处理的回调
+   * @return {undefined}
+   * **/
+  function switchExtType(callback) {
+    if(getType(ext) === 'string'){
+      callback(ext);
+    }
+    else if(getType(ext) === 'array'){
+      ext.forEach(function (v) {
+        callback(v);
+      });
+    }
+    else {
+      throw Error('app.config   template   配置类型错误，应为string或者array');
+    }
+  }
+
+
+  /**
+   * 根据template的ext配置，给config添加loader配置
    * @param {object} config
    * @return {object} config
    * **/
   function addLoaderConfig(config){
-    config.module.rules.unshift(templateConfig[ext]);
+    /** 添加指定loader **/
+    switchExtType(function (ext){
+      if(templateConfig[ext]){
+        config.module.rules.unshift(templateConfig[ext]);
+      }
+      else {
+        throw Error(`未找到${ext}文件对应的loader配置`);
+      }
+    });
     return config;
   }
 
@@ -72,7 +100,10 @@ module.exports = function (config) {
    * **/
   function addPluginConfig(config){
     for(let entry of Object.keys(config.entry)){
-      let templateList = [`${entry}.${ext}`, `index.${ext}`];    //可能的entry文件名
+      let templateList = [];    //可能的entry文件名
+      switchExtType(function (v){
+        templateList.push(...[`${entry}.${v}`, `index.${v}`]);
+      });
       let hasTemplate = templateList.some(template => {//1.检查是否有有效的模板文件
         let p = path.resolve(PAGE_PATH, entry, template);
         if(fs.existsSync(p)){

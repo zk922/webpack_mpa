@@ -1,6 +1,6 @@
 const appConfig = require('../../app.config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const {getType} = require('./utils');
 /**
  * 添加样式表的配置
  * **/
@@ -55,13 +55,16 @@ module.exports = function addStyleConfig(config) {
 
 
   /**================= addConfig ====================**/
-  if(typeof ext === 'string'){//如果仅有一种样式文件
+  if(getType(ext) === 'string'){//如果仅有一种样式文件
     addConfig(ext);
   }
-  else if(Object.prototype.toString.call(ext) === '[object Array]'){
+  else if(getType(ext) === 'array'){
     ext.forEach(function (v){
       addConfig(v);
     })
+  }
+  else {
+    throw Error('app.config  style  配置错误');
   }
   config.plugins.push(pluginConfig);
 
