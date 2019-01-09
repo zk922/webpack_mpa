@@ -38,17 +38,31 @@ module.exports = function addStyleConfig(config) {
     chunkFilename: isProduction ? "[name].[hash].css" : "[name].css"
   });
 
+  function addConfig(ext) {
+    if(ext === 'scss' || 'sass'){
+      config.module.rules.push(sassConfig);
+    }
+    else if(ext === 'less'){
+      config.module.rules.push(lessConfig);
+    }
+    else if(ext === 'css'){
+      config.module.rules.push(cssConfig);
+    }
+    else {
+      throw Error('没有找到对应的样式表配置');
+    }
+  }
 
-  if(ext === 'scss' || 'sass'){
-    config.module.rules.push(sassConfig);
-  }
-  else if(ext === 'less'){
-    config.module.rules.push(lessConfig);
-  }
-  else {
-    config.module.rules.push(cssConfig);
-  }
 
+  /**================= addConfig ====================**/
+  if(typeof ext === 'string'){//如果仅有一种样式文件
+    addConfig(ext);
+  }
+  else if(Object.prototype.toString.call(ext) === '[object Array]'){
+    ext.forEach(function (v){
+      addConfig(v);
+    })
+  }
   config.plugins.push(pluginConfig);
 
   return config;
