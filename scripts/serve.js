@@ -40,5 +40,5 @@ generateConfig().then(config => {
     console.log('server started at port: ' + port);
     //3.打包完成，服务器启动后，自动打开浏览器
     cp.exec('explorer http://localhost:' + port + '/' + Object.keys(config.entry)[0]);
-  })
+  });
 });

@@ -14,7 +14,7 @@ const {PAGE_PATH, PROJECT_PATH} = require('./0.app-path');
 const appConfig = require('../../app.config');
 const {getType} = require('./utils');
 
-module.exports = function (config) {
+module.exports = function (config){
   //1.获取环境信息
   const env = process.env.NODE_ENV;
   const isProduction = env === 'production';
@@ -60,7 +60,7 @@ module.exports = function (config) {
    * @param { function } callback 对ext进行处理的回调
    * @return {undefined}
    * **/
-  function switchExtType(callback) {
+  function switchExtType(callback){
     if(getType(ext) === 'string'){
       callback(ext);
     }
@@ -104,7 +104,7 @@ module.exports = function (config) {
       switchExtType(function (v){
         templateList.push(...[`${entry}.${v}`, `index.${v}`]);
       });
-      let hasTemplate = templateList.some(template => {//1.检查是否有有效的模板文件
+      let hasTemplate = templateList.some(template => {//检查是否有有效的模板文件
         let p = path.resolve(PAGE_PATH, entry, template);
         if(fs.existsSync(p)){
           config.plugins.push(new HtmlWebpackPlugin({
@@ -130,7 +130,7 @@ module.exports = function (config) {
    * @param {object} config webpack的配置对象，需要已经使用entry.js中的脚本配置好了entry
    * @return {object}
    * **/
-  function addTemplateConfig(config) {
+  function addTemplateConfig(config){
     addLoaderConfig(config);
     addPluginConfig(config);
     return config;
