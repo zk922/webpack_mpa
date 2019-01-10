@@ -7,13 +7,14 @@ const express = require('express');
 const cp = require('child_process');
 const hotMiddleware = require('webpack-hot-middleware');
 
-const set_NODE_ENV = require('./config_scripts/argv');
-const generateConfig = require('./config_scripts/generate');
 const appConfig = require('../app.config');
 
 //1.根据输入参数，设置process.env.NODE_ENV
+const set_NODE_ENV = require('./config_scripts/argv');
 set_NODE_ENV();
+
 //2.动态生成打包配置，启动服务器
+const generateConfig = require('./config_scripts/generate');
 generateConfig().then(config => {
   //1.添加热更功能需要的入口配置
   let hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
