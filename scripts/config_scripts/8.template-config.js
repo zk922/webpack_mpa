@@ -10,48 +10,14 @@ const fs = require('fs');
 const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {PAGE_PATH, PROJECT_PATH} = require('./0.app-path');
+const {PAGE_PATH} = require('./0.app-path');
 const appConfig = require('../../app.config');
 const {getType} = require('./utils');
+const {templateConfig} = require('./0.loader-config');
 
 module.exports = function (config){
   //1.获取环境信息
-  const env = process.env.NODE_ENV;
-  const isProduction = env === 'production';
 
-  //2.模板的loader配置
-  const htmlLoaderConfig = {
-    minimize: isProduction,
-    removeComments: isProduction,
-    collapseWhitespace: isProduction,
-    attrs: [':src', ':href']
-  };
-  const templateConfig = {
-    html: {
-      test: /\.html$/,
-      use: [
-        {
-          loader: 'html-loader',
-          options: htmlLoaderConfig
-        }
-      ]
-    },
-    ejs: {
-      test: /\.ejs$/,
-      use: [
-        {
-          loader: 'html-loader',
-          options: htmlLoaderConfig
-        },
-        {
-          loader: path.resolve(__dirname, '../loaders/ejs-loader.js'), //自己简单实现的使用ejs2 engine的ejs-loader
-          options: {
-            context: PROJECT_PATH
-          }
-        }
-      ]
-    }
-  };
   //3.获取当前的模板选择，默认html
   let ext = appConfig.template || 'html';
 
@@ -84,7 +50,7 @@ module.exports = function (config){
     /** 添加指定loader **/
     switchExtType(function (ext){
       if(templateConfig[ext]){
-        config.module.rules.unshift(templateConfig[ext]);
+        config.module.rules.push(templateConfig[ext]);
       }
       else {
         throw Error(`未找到${ext}文件对应的loader配置`);

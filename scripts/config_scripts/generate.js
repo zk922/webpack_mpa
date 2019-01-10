@@ -10,8 +10,7 @@ const addTemplateConfig = require('./8.template-config');   //添加模板配置
 const addOptimization = require('./9.optimize');            //添加优化配置项
 const addDevtool = require('./10.devtool');                 //devtool sourcemap配置
 
-
-
+let {getType} = require('./utils');
 
 module.exports = async function generateConfig(){
   await setMode(config);
@@ -24,5 +23,12 @@ module.exports = async function generateConfig(){
   await addTemplateConfig(config);
   await addOptimization(config);
   await addDevtool(config);
+
+  //尝试添加自定义的配置
+  let customConfig = require('../../mpa.config');
+  if(getType(customConfig) === 'function'){
+    await customConfig(config);
+  }
+
   return config;
 };
