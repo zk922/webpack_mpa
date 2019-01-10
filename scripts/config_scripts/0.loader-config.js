@@ -1,5 +1,6 @@
 const {SRC_PATH, PROJECT_PATH} = require('./0.app-path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
 
 const isProduction = process.env.NODE_ENV === 'production';
 /**
