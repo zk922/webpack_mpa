@@ -12,11 +12,11 @@ const fontLoader = {
     {
       loader: "url-loader",
       options: {
-        name: process.env.NODE_ENV === 'production' ? 'fonts/[name].[hash].[ext]' : '[path][name].[ext]',
+        name: process.env.NODE_ENV === 'production' ? '[hash].[ext]' : '[name].[ext]',
         limit: 5120,
-        publicPath: "/",
-        context: SRC_PATH,
-        outputPath: "/"
+        publicPath: "assets/fonts",
+        // context: SRC_PATH,
+        outputPath: "assets/fonts"
       }
     }
   ]
@@ -28,10 +28,10 @@ const imgLoader = {
       loader: 'url-loader',
       options: {
         limit: 10240,
-        name: process.env.NODE_ENV === 'production' ? 'images/[hash].[ext]' : '[path][name].[ext]',
-        publicPath: '/',
-        context: SRC_PATH,        //源码目录,这里更改context，是为了在开发环境下，导出图片和图片源的路径一致
-        outputPath: '/'
+        name: process.env.NODE_ENV === 'production' ? '[hash].[ext]' : '[name].[ext]',
+        publicPath: 'assets/images',
+        // context: SRC_PATH,        //源码目录,这里更改context，是为了在开发环境下，导出图片和图片源的路径一致
+        outputPath: 'assets/images'
       }
     }
   ]

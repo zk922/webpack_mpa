@@ -2,7 +2,7 @@
 import './page1.scss';
 // import './page2.less';
 import * as $ from "jquery";
-
+import '../../assets/images/testimg/ee.jpg';
 
 let a = 1;
 let _ = require('lodash');
