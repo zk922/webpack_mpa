@@ -1,8 +1,8 @@
 {
   "package-manager": "yarn",
-  "language": "js",
+  "language": ["js", "ts"],
   "style": "scss",
-  "template": "ejs",
+  "template": ["ejs", "html"],
   "devServer": {
     "port": 3100
   }

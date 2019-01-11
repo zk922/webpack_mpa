@@ -1,3 +1,12 @@
-import * as $ from "jquery";
-require('../../assets/js/b');
-import '../../assets/style/a.scss';
+import Vue from 'vue';
+import App from './app';
+new Vue({
+  el: '#app',
+  components: { App },
+  template: '</App>'
+});
+
+
+
+
+
