@@ -7,27 +7,43 @@ let {getType} = require('./utils');
  * 对代码配置babel
  * **/
 module.exports = function (config) {
+  let jsLoaderAdded = false;
+  function addJsConfig(){
+    if(jsLoaderAdded) return;
+    config.resolve.extensions.push('.js');
+    config.module.rules.push(languageLoader.js);
+    jsLoaderAdded = true;
+  }
 
+  let tsLoaderAdded = false;
+  function addTsConfig(){
+    if(tsLoaderAdded) return;
+    config.resolve.extensions.push('.ts', '.tsx');
+    config.module.rules.push(languageLoader.ts);
+    tsLoaderAdded = true;
+  }
 
   let language = appConfig.language || 'js';
-  let resolve;
+
+  addJsConfig(); //无论如何，都会给js添加babel配置
+
   if(getType(language) === 'string'){
-    resolve = [language];
+    if(language === 'ts') addTsConfig();
   }
   else if(getType(language) === 'array'){
-    resolve = language;
+    language.forEach(v => {
+      if(v === 'ts' || v === 'tsx'){
+        addTsConfig();
+      }
+      else{
+        if(!languageLoader[v]) throw Error(`没有找到${v}文件对应的loader`);
+        config.resolve.extensions.push('.' + v);
+        config.module.rules.push(languageLoader[v]);
+      }
+    });
   }
   else {
     throw new Error(`app.config   language   配置错误`);
   }
-  config.resolve.extensions = resolve;
-
-  resolve.forEach(v => {
-    if(!languageLoader[v]){
-      throw new Error(`未找到${v}文件对应的loader默认配置`);
-    }
-    config.module.rules.push(languageLoader[v]);
-  });
-
   return config;
 };

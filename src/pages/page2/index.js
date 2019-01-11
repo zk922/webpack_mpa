@@ -1,4 +1,4 @@
-import * as angular from "angular"
+
 
 require('../../assets/js/a');
 require('../../assets/js/b');

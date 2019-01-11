@@ -30,9 +30,12 @@ generateConfig().then(config => {
 
   app.use(webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath
+    // writeToDisk: true
   }));
   app.use(hotMiddleware(compiler));
-
+  app.get('/', function (req, res, next) {
+    res.send(config);
+  });
   let port = appConfig.devServer ? appConfig.devServer.port : 3100;
   app.listen(port, err => {
     if(err){
