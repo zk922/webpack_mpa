@@ -36,7 +36,7 @@ module.exports = function (config) {
         addTsConfig();
       }
       else{
-        if(!language[v]) throw Error(`没有找到${v}文件对应的loader`);
+        if(!languageLoader[v]) throw Error(`没有找到${v}文件对应的loader`);
         config.resolve.extensions.push('.' + v);
         config.module.rules.push(languageLoader[v]);
       }
