@@ -8,6 +8,6 @@ let a = 1;
 let _ = require('lodash');
 console.log(_.trim(' 12 3 4666666'));
 
-console.log(require('../../env/env').environment);
+console.log(require('../../env/env.js').environment);
 
-require('../../assets/js/a');
+require('../../assets/js/a.js');

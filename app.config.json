@@ -1,6 +1,6 @@
 {
   "package-manager": "yarn",
-  "language": "ts",
+  "language": "js",
   "style": "scss",
   "template": "ejs",
   "devServer": {
