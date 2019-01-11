@@ -30,10 +30,10 @@
 ```
 
 ## TODO
-- [ ] babel
+- [x] babel
 - [ ] post-css  
 - [ ] hmr  
 - [ ] Uglify  
 - [ ] unit test
 - [x] environments
-- [ ] hook before compile
+- [x] hook before compile
