@@ -30,8 +30,23 @@ function addVueConfigs(config) {
 
 
   //5.添加ts配置
-  languageLoader.ts.options = { appendTsSuffixTo: [/\.vue$/] }
+  rules.splice(rules.indexOf(languageLoader.ts), 1, {
+    test: /\.tsx?$/,
+    use: [
+      'babel-loader',
+      {
+        loader: 'ts-loader',
+        options: {
+          appendTsSuffixTo: [/\.vue$/]
+        }
+      }
+    ]
+  });
 
+  //6.添加runtime配置
+  config.resolve.alias = {
+    vue$: 'vue/dist/vue.esm.js'
+  };
   return config;
 }
 

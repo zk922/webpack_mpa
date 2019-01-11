@@ -14,5 +14,7 @@
 </script>
 
 <style scoped lang="scss">
-
+  #app{
+    background: red;
+  }
 </style>
